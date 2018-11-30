@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
-import { Button, Dropdown } from 'shineout'
+import { Button, Dropdown, Input } from 'shineout'
+import docsearch from 'docsearch.js'
 import locate, { setLanguage } from './locate'
 import classGenerate from './utils/classname'
 import theme from './utils/theme'
 import logo from './icons/logo'
 import Icon from './icons/Icon'
+import FontAwesome from './pages/components/Icon/FontAwesome'
 
 const headerClass = classGenerate(require('./styles/header.less'), 'header')
 
@@ -38,6 +40,16 @@ function handleThemeClick(data) {
 }
 
 class Header extends React.PureComponent {
+  componentDidMount() {
+    docsearch({
+      appId: 'T20UAXDNF8',
+      apiKey: '531a2b633812b8ced64982d1c26381b4',
+      indexName: 'shine',
+      inputSelector: '#algolia-doc-search',
+      // algoliaOptions: { facetFilters: [`version: ${version}`] },
+      debug: false, // Set debug to true if you want to inspect the dropdown
+    })
+  }
   render() {
     // const path = getPath(this.context.location.pathname)
     const path = ''
@@ -72,6 +84,10 @@ class Header extends React.PureComponent {
             ))
           }
         </div>
+        <Input.Group size="small" className={headerClass('search')} id="algolia-doc-search" >
+          <Input placeholder={locate('搜索文档', 'Search Docs')} />
+          <FontAwesome name="search" />
+        </Input.Group>
         <div className={headerClass('right')}>
           <Button size="small" onClick={handleLangClick} style={{ marginRight: 12 }}>
             {locate('English', '中文')}
