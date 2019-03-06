@@ -9,30 +9,29 @@ const spinStyle = { display: 'inline-block', marginRight: 8 }
 
 class Button extends PureComponent {
   render() {
-    const {
-      children, outline, type, size, href, htmlType, loading, disabled, onRef, ...others
-    } = this.props
+    const { children, outline, type, size, href, htmlType, loading, disabled, onRef, ...others } = this.props
     const className = classnames(
       buttonClass('_', type, outline && 'outline', {
         large: size === 'large',
         small: size === 'small',
       }),
-      this.props.className,
+      this.props.className
     )
 
     if (href) {
       return (
-        <a href={href} {...others} className={className}>{children}</a>
+        <a href={href} {...others} className={className}>
+          {children}
+        </a>
       )
     }
     return (
       <button {...others} ref={onRef} disabled={disabled || loading} type={htmlType} className={className}>
-        {
-          loading &&
-          <span style={spinStyle}>
+        {loading && (
+          <span className={buttonClass('loading')}>
             <Spin size={12} name="ring" color="#fff" />
           </span>
-        }
+        )}
         {children}
       </button>
     )
