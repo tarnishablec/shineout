@@ -5,8 +5,6 @@ import { getProps, defaultProps } from '../utils/proptypes'
 import Spin from '../Spin'
 import { buttonClass } from '../styles'
 
-const spinStyle = { display: 'inline-block', marginRight: 8 }
-
 class Button extends PureComponent {
   render() {
     const { children, outline, type, size, href, htmlType, loading, disabled, onRef, ...others } = this.props
