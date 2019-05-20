@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { paginationClass } from '../styles'
+import { varClass } from '../utils/classname'
 
 class Item extends PureComponent {
   constructor(props) {
@@ -20,6 +21,7 @@ class Item extends PureComponent {
       'item',
       this.props.className,
       isCurrent && 'current',
+      isCurrent && varClass('primary', 'border', 'primary', 'background')
     )
 
     return (

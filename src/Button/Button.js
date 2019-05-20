@@ -29,7 +29,7 @@ class Button extends PureComponent {
         large: size === 'large',
         small: size === 'small',
       }),
-      varClass(type, 'background'),
+      outline ? varClass(type, 'border', type, 'color') : varClass(type, 'background'),
       this.props.className,
     )
 

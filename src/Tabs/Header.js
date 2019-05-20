@@ -6,6 +6,7 @@ import Button from '../Button'
 import icons from '../icons'
 import Tab from './Tab'
 import { tabsClass } from '../styles'
+import { varClass } from '../utils/classname'
 
 class Header extends PureComponent {
   constructor(props) {
@@ -125,7 +126,7 @@ class Header extends PureComponent {
             <Button
               key={tab.id}
               onClick={tab.isActive ? undefined : onChange.bind(this, tab.id)}
-              className={tabsClass(tab.isActive && 'button-active')}
+              className={tabsClass(tab.isActive && 'button-active', tab.isActive && varClass('primary', 'background'))}
             >
               {tab.tab}
             </Button>

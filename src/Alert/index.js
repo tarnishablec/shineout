@@ -5,6 +5,7 @@ import { capitalize } from '../utils/strings'
 import { getProps, defaultProps } from '../utils/proptypes'
 import { alertClass } from '../styles'
 import icons from '../icons'
+import { varClass } from '../utils/classname'
 
 class Alert extends PureComponent {
   constructor(props) {
@@ -79,6 +80,7 @@ class Alert extends PureComponent {
       dismiss === 1 && 'dismissed',
       onClose && 'with-close',
       icon && 'with-icon',
+      varClass(type, 'background')
     )
     if (className) wrapClassName += ` ${className}`
 

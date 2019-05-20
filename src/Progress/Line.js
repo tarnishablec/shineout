@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { progressClass } from '../styles'
+import { varClass } from '../utils/classname'
 
 function Line(props) {
   const {
@@ -21,7 +22,7 @@ function Line(props) {
         className={progressClass('background')}
         style={{ height: strokeWidth, background, borderRadius: strokeWidth / 2 }}
       >
-        <div className={progressClass('front')} style={innerStyle} />
+        <div className={progressClass('front', varClass(type || 'primary', 'background'))} style={innerStyle} />
       </div>
       { children !== undefined && <div className={progressClass('content')}>{children}</div> }
     </div>

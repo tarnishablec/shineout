@@ -65,8 +65,20 @@ function setColor(options) {
     attrs.forEach(attr => {
       const className = varClass(type, attr)
       const styleName = className.substring(className.indexOf(type) + type.length + 1)
-      text += `.${varClass(type, attr)}{${styleName}:${value}}`
+      const originStyle = `.${className}{${styleName}:${value}} `
+      text += originStyle
+      // cover attr selector
+      text += `.${className}[disabled]{${styleName}:${value}} `
+      // cover parent-child selector
+      text += `[class*="-"] .${className}{${styleName}:${value}; stroke:${value}} `
     })
+    // others
+    if (type === 'primary') {
+      // tabs-tab :after
+      text += `[class*="tabs"] [class*="-active"]:after{background:${value}} `
+      text += `[class*="tabs"] [class*="-active"]:not(:last-child):after{background:${value}; border-color:${value}} `
+      text += `[class*="tabs"] a[class*="active"][class*="link"]{color:${value} `
+    }
   }
   styleReplace(text, styleReplaceUid)
 }
@@ -91,6 +103,8 @@ export const color = {
     setColor(options)
   },
 }
+
+window.color = color
 
 export const style = {
   getClassname,

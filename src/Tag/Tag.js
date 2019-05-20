@@ -7,6 +7,7 @@ import icons from '../icons'
 import { isPromise } from '../utils/is'
 import { isDark } from '../utils/color'
 import { tagClass } from '../styles'
+import { varClass } from '../utils/classname'
 
 class Tag extends PureComponent {
   constructor(props) {
@@ -98,6 +99,7 @@ class Tag extends PureComponent {
       '_',
       disabled && 'disabled',
       type,
+      varClass(type, 'background')
     )
     const inlineClassName = tagClass('inline')
     const click = !onClose ? { onClick: this.handleClick } : {}

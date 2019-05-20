@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { tabsClass } from '../styles'
 import { getUidStr } from '../utils/uid'
+import { varClass } from '../utils/classname'
 
 class Tab extends PureComponent {
   constructor(props) {
@@ -49,7 +50,11 @@ class Tab extends PureComponent {
     const style = this.getActiveStyle()
 
     const props = {
-      className: classnames(tabsClass('tab', isActive && 'active', disabled && 'disabled'), this.uid),
+      className: classnames(
+        tabsClass('tab', isActive && 'active', disabled && 'disabled'),
+        this.uid,
+        isActive && varClass('primary', 'color')
+      ),
       onClick: this.handleClick,
       style,
     }

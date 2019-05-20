@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Spin from '../Spin'
 import { PureComponent } from '../component'
 import { uploadClass } from '../styles'
+import { varClass } from '../utils/classname'
 import Upload from './Upload'
 
 const SPIN = color => (
@@ -72,7 +73,8 @@ class Progress extends PureComponent {
     const wrapperClassname = classnames(
       uploadClass('bprogress', others.disabled && 'disabled'),
       this.props.className,
-      uploading ? uploadClass('uploading', `border-${type}`) : uploadClass(`bprogress-${type}`)
+      uploading ? uploadClass('uploading', `border-${type}`) : uploadClass(`bprogress-${type}`),
+      varClass(type, 'background', type, 'border')
     )
     const style = {
       right: uploading ? `${100 - this.state.progress}%` : '100%',

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { progressClass } from '../styles'
+import { varClass } from '../utils/classname'
 
 function Circle(props) {
   const {
@@ -30,7 +31,7 @@ function Circle(props) {
         {
           value > 0 &&
           <circle
-            className={progressClass('front')}
+            className={progressClass('front', varClass(type || 'primary', 'background'))}
             cx="100"
             cy="100"
             r={r}
