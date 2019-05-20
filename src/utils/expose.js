@@ -1,7 +1,7 @@
 import { isObject } from './is'
 import { exposeClass } from '../styles/expose'
 import { getUidStr } from './uid'
-import config from '../config'
+import { varClass } from './classname'
 
 const types = ['primary', 'warning', 'danger', 'success', 'secondary']
 const attrs = ['background', 'color', 'border']
@@ -25,6 +25,19 @@ function validateFormat(data) {
   return true
 }
 
+function styleReplace(text, id) {
+  let style = document.head.querySelector(`#${id}`)
+  if (style) {
+    style.innerHTML = text
+    return
+  }
+  style = document.createElement('style')
+  style.type = 'text/css'
+  style.id = id
+  style.innerHTML = text
+  document.head.appendChild(style)
+}
+
 function getClassname(data) {
   if (!validateFormat(data)) return ''
   return Object.keys(data)
@@ -44,17 +57,18 @@ function getColor(type) {
   return color
 }
 
-function styleReplace(text, id) {
-  let style = document.head.querySelector(`#${id}`)
-  if (style) {
-    style.innerHTML = text
-    return
+function setColor(options) {
+  if (!options) return
+  let text = ''
+  for (const [type, value] of Object.entries(options)) {
+    // eslint-disable-next-line no-loop-func
+    attrs.forEach(attr => {
+      const className = varClass(type, attr)
+      const styleName = className.substring(className.indexOf(type) + type.length + 1)
+      text += `.${varClass(type, attr)}{${styleName}:${value}}`
+    })
   }
-  style = document.createElement('style')
-  style.type = 'text/css'
-  style.id = id
-  style.innerHTML = text
-  document.head.appendChild(style)
+  styleReplace(text, styleReplaceUid)
 }
 
 export const color = {
@@ -73,13 +87,8 @@ export const color = {
   get secondary() {
     return getColor('secondary')
   },
-  set set(options) {
-    if (!options) return
-    let text = ''
-    for (const [key, value] of Object.entries(options)) {
-      text += `.${config.prefix}-vars-${key} {${key.substring(key.indexOf('-') + 1)}: ${value}}`
-    }
-    styleReplace(text, styleReplaceUid)
+  set(options) {
+    setColor(options)
   },
 }
 window.color = color

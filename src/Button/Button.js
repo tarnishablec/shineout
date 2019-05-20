@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { getProps, defaultProps } from '../utils/proptypes'
 import Spin from '../Spin'
+import { varClass } from '../utils/classname'
 import { buttonClass } from '../styles'
 
 const spinStyle = { display: 'inline-block', marginRight: 8 }
@@ -28,6 +29,7 @@ class Button extends PureComponent {
         large: size === 'large',
         small: size === 'small',
       }),
+      varClass(type, 'background'),
       this.props.className,
     )
 
