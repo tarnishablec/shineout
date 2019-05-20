@@ -91,7 +91,6 @@ export const color = {
     setColor(options)
   },
 }
-window.color = color
 
 export const style = {
   getClassname,
