@@ -77,7 +77,12 @@ function setColor(options) {
       // tabs-tab :after
       text += `[class*="tabs"] [class*="-active"]:after{background:${value}} `
       text += `[class*="tabs"] [class*="-active"]:not(:last-child):after{background:${value}; border-color:${value}} `
-      text += `[class*="tabs"] a[class*="active"][class*="link"]{color:${value} `
+      text += `[class*="tabs"] a[class*="active"][class*="link"]{color:${value}} `
+      // input hover&focus
+      text += `label[class*="-input"]:hover{border-color:${value}} `
+      // checkbox
+      text += `label[class*="-checkinput-"] i[class*="-checkinput-indicator"][class*="-checkinput-checkbox"]{background:${value};border-color:${value}}`
+      text += `label[class*="-checkinput"]:hover i[class*="-checkinput-indicator"][class*="-checkinput-checkbox"]{border-color:${value}} `
     }
   }
   styleReplace(text, styleReplaceUid)
